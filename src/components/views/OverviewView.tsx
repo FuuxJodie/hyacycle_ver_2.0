@@ -8,15 +8,17 @@ import {
   ShieldCheck,
   CheckCircle2,
   Sparkles,
-  Zap,
-  BatteryCharging,
-  Cpu,
   Waves,
-  Calendar,
-  Send,
-  Building2,
+  Zap,
+  Globe2,
+  Users,
+  Compass,
+  FileCheck,
   ChevronRight,
-  Check
+  Send,
+  Calendar,
+  Building2,
+  Award
 } from 'lucide-react';
 import { NavigationTab } from '../../types';
 
@@ -26,180 +28,156 @@ interface OverviewViewProps {
 }
 
 export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigate, onAddToCart }) => {
+  const [demoDate, setDemoDate] = useState('2025-06-15');
+  const [demoLake, setDemoLake] = useState('Waduk Cirata (Jawa Barat)');
+  const [bumnOrg, setBumnOrg] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    institution: '',
-    email: '',
-    phone: '',
-    category: 'Pembersihan Reservoir PLTA / Bendungan',
-    lakeArea: '',
-  });
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 5000);
   };
 
   return (
-    <div className="space-y-16 pb-20">
+    <div className="space-y-16 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-8 sm:pt-14 pb-10 overflow-hidden">
-        {/* Ambient Glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-500/15 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/2 right-10 w-[400px] h-[300px] bg-teal-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <section className="relative pt-4 sm:pt-10 overflow-hidden">
+        {/* Soft decorative background glows */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-gradient-to-b from-teal-100/50 via-emerald-50/30 to-transparent blur-3xl pointer-events-none -z-10" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            {/* Left Hero Content (7 cols) */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-semibold tracking-wide shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                B2B & B2G CLEANTECH AUTOMATION
-              </div>
-
-              {/* Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-                Transforming Water Crisis into{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
-                  Circular Wealth
-                </span>
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-                Solusi integrasi <strong className="text-white">autonomous robotic harvesters</strong> dan analitik satelit optik untuk memulihkan reservoir bendungan, danau, dan sungai dari ledakan gulma eceng gondok. Membuka rantai nilai biomassa hijau zero-waste yang terverifikasi standar ESG OJK.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('consultation-form');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-xl shadow-emerald-900/40 flex items-center gap-2 transition cursor-pointer"
-                >
-                  <Calendar className="w-4 h-4" />
-                  Jadwalkan Demo SaaS & Armada
-                </button>
-                <button
-                  onClick={() => onNavigate('marketplace')}
-                  className="px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-emerald-400 bg-slate-900/90 hover:bg-slate-800 border border-emerald-500/30 hover:border-emerald-500/60 shadow-sm flex items-center gap-2 transition cursor-pointer"
-                >
-                  <ShoppingBag className="w-4 h-4 text-emerald-400" />
-                  Beli Produk Zero Waste
-                </button>
-              </div>
-
-              {/* Trust checkpoints */}
-              <div className="flex flex-wrap items-center gap-6 pt-3 text-xs font-mono text-slate-400">
-                <div className="flex items-center gap-1.5 text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>ISO 14064 & POJK 51 Audited</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>Telemetry LoRaWAN & GPS RTK (±3cm)</span>
-                </div>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Headline & Action Buttons (7 cols) */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-mono font-semibold">
+              <span className="flex h-2 w-2 rounded-full bg-teal-500 animate-pulse" />
+              B2B & B2G Cleantech Automation
             </div>
 
-            {/* Right Hero Card: Floating Live Harvester Preview (5 cols) */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl bg-gradient-to-b from-slate-900/90 to-slate-950 border border-emerald-500/30 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden">
-                {/* Header card */}
-                <div className="px-4 py-3 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between text-xs font-mono">
-                  <span className="flex items-center gap-2 text-emerald-400 font-bold">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    UNIT HYA-04 : DANAU JATILUHUR
-                  </span>
-                  <span className="bg-emerald-950 border border-emerald-700 text-emerald-300 px-2 py-0.5 rounded text-[10px] font-bold">
-                    STATUS: OTONOM AKTIF
-                  </span>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+              Transforming Water Crisis into{' '}
+              <span className="bg-gradient-to-r from-teal-600 via-emerald-600 to-teal-700 bg-clip-text text-transparent">
+                Circular Wealth.
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+              Solusi robotik pemanen eceng gondok otonom berbasis IoT dan citra satelit Sentinel-2. Memulihkan perairan nasional secara berkelanjutan, terintegrasi dengan hilirisasi biomassa zero-waste dan pelaporan ESG terverifikasi OJK.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                onClick={() => onNavigate('telemetry')}
+                className="px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-teal-600 hover:bg-teal-500 shadow-lg shadow-teal-700/20 flex items-center gap-2 transition cursor-pointer"
+              >
+                <Radio className="w-4 h-4 animate-pulse" />
+                <span>Pantau Telemetri Langsung</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => onNavigate('csr')}
+                className="px-6 py-3.5 rounded-xl font-bold text-sm text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 shadow-xs flex items-center gap-2 transition cursor-pointer"
+              >
+                <Layers className="w-4 h-4 text-teal-600" />
+                <span>Kemitraan CSR BUMN</span>
+              </button>
+            </div>
+
+            {/* Certifications Row */}
+            <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center gap-6 text-xs text-slate-500 font-mono">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-teal-600" />
+                Audit OJK (POJK 51)
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-teal-600" />
+                ISO 14064 Carbon Ready
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Award className="w-4 h-4 text-teal-600" />
+                SNI 19-7030-2004
+              </span>
+            </div>
+          </div>
+
+          {/* Right Column: Floating Autonomous Harvester Live Preview Card (5 cols) */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-3xl bg-white border border-teal-200/90 p-6 shadow-xl shadow-teal-900/5 space-y-4">
+              {/* Header card */}
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2 font-mono text-xs">
+                  <span className="w-2.5 h-2.5 rounded-full bg-teal-500 animate-ping" />
+                  <strong className="text-slate-900">HYA-04 CATAMARAN</strong>
                 </div>
+                <span className="text-[10px] font-mono font-bold bg-teal-50 text-teal-800 border border-teal-200 px-2 py-0.5 rounded">
+                  OTONOM AKTIF
+                </span>
+              </div>
 
-                {/* Simulated Graphic of Harvester Vessel */}
-                <div className="relative h-56 bg-gradient-to-b from-slate-950 via-teal-950/40 to-slate-900 flex items-center justify-center p-4 overflow-hidden">
-                  {/* Water grid ripples */}
-                  <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px]" />
+              {/* Graphical Harvester Silhouette */}
+              <div className="relative h-44 rounded-2xl bg-gradient-to-br from-teal-50/60 to-slate-100/80 border border-teal-100 flex items-center justify-center overflow-hidden">
+                {/* Background grid */}
+                <div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#0d948815_1px,transparent_1px),linear-gradient(to_bottom,#0d948815_1px,transparent_1px)] bg-[size:16px_16px]" />
 
-                  {/* Overlaid Badges on Photo */}
-                  <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
-                    <span className="text-[10px] font-mono bg-black/75 backdrop-blur-sm border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-md flex items-center gap-1">
-                      <Radio className="w-3 h-3 text-emerald-400" /> LiDAR 360° & Sonar Depth
-                    </span>
-                    <span className="text-[10px] font-mono bg-black/75 backdrop-blur-sm border border-teal-500/50 text-teal-300 px-2 py-0.5 rounded-md flex items-center gap-1">
-                      <Zap className="w-3 h-3 text-amber-400" /> Solar Hybrid 4.2 kWp
-                    </span>
-                  </div>
+                {/* Hydro Catamaran Vessel Vector Art */}
+                <svg viewBox="0 0 260 110" className="w-56 h-auto drop-shadow-md">
+                  {/* Water ripples */}
+                  <path d="M 10,95 Q 60,90 120,95 T 240,95" stroke="#99f6e4" strokeWidth="3" fill="none" />
+                  <path d="M 30,102 Q 80,98 150,102 T 230,102" stroke="#ccfbf1" strokeWidth="2" fill="none" />
 
-                  {/* SVG Harvester Catamaran Graphic Representation */}
-                  <div className="relative w-72 h-36 flex items-center justify-center">
-                    <svg viewBox="0 0 320 160" className="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-                      {/* Water base ripples */}
-                      <path d="M20 130 Q80 140 160 130 T300 130" stroke="#059669" strokeWidth="2" fill="none" opacity="0.4" />
-                      <path d="M10 138 Q90 148 170 138 T310 138" stroke="#0d9488" strokeWidth="1.5" fill="none" opacity="0.3" />
+                  {/* Left pontoon */}
+                  <rect x="25" y="70" width="85" height="18" rx="8" fill="#334155" />
+                  {/* Right pontoon */}
+                  <rect x="145" y="70" width="85" height="18" rx="8" fill="#334155" />
 
-                      {/* Catamaran Twin Hulls */}
-                      <path d="M40 120 L80 128 L240 128 L270 120 L250 114 L70 114 Z" fill="#1e293b" stroke="#334155" strokeWidth="2" />
-                      <path d="M50 108 L90 114 L230 114 L260 108 L245 104 L75 104 Z" fill="#0f172a" stroke="#10b981" strokeWidth="1.5" />
+                  {/* Main deck structure */}
+                  <polygon points="40,70 70,35 185,35 215,70" fill="#0f766e" />
+                  {/* Front conveyor ramp */}
+                  <polygon points="100,88 155,88 140,55 115,55" fill="#14b8a6" />
+                  {/* Solar panel roof */}
+                  <rect x="80" y="24" width="95" height="12" rx="3" fill="#0284c7" />
+                  {/* RTK GPS Antenna */}
+                  <line x1="165" y1="24" x2="165" y2="10" stroke="#38b8a6" strokeWidth="2.5" />
+                  <circle cx="165" cy="8" r="4" fill="#10b981" />
+                  {/* Bow LiDAR Sensor */}
+                  <circle cx="128" cy="40" r="5" fill="#f59e0b" />
+                </svg>
 
-                      {/* Front Harvesting Conveyor Ramp & Auger Cutter */}
-                      <path d="M30 125 L90 85 L140 85 L120 120 Z" fill="#047857" stroke="#34d399" strokeWidth="1.5" />
-                      <circle cx="35" cy="122" r="9" fill="#065f46" stroke="#10b981" strokeWidth="2" />
-                      <line x1="35" y1="113" x2="35" y2="131" stroke="#34d399" strokeWidth="2" />
-                      <line x1="26" y1="122" x2="44" y2="122" stroke="#34d399" strokeWidth="2" />
-
-                      {/* Biomass Hopper Cage */}
-                      <rect x="130" y="70" width="85" height="42" rx="4" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" opacity="0.8" />
-                      {/* Green Biomass Load inside hopper */}
-                      <path d="M135 108 Q150 78 180 82 T210 108 Z" fill="#22c55e" opacity="0.85" />
-
-                      {/* Solar Canopy Roof */}
-                      <polygon points="120,55 240,55 230,62 110,62" fill="#0284c7" stroke="#38bdf8" strokeWidth="1.5" />
-                      <line x1="120" y1="62" x2="130" y2="70" stroke="#94a3b8" strokeWidth="2" />
-                      <line x1="230" y1="62" x2="215" y2="70" stroke="#94a3b8" strokeWidth="2" />
-
-                      {/* Antenna / LiDAR Dome */}
-                      <line x1="210" y1="55" x2="210" y2="40" stroke="#f8fafc" strokeWidth="2" />
-                      <circle cx="210" cy="38" r="4" fill="#ef4444" className="animate-ping" />
-                      <circle cx="210" cy="38" r="3" fill="#10b981" />
-                    </svg>
-                  </div>
-
-                  {/* Water plants floating indicator */}
-                  <div className="absolute bottom-2 left-4 text-[10px] font-mono text-emerald-400/80">
-                    Dense Bloom: Eichhornia Crassipes
-                  </div>
+                {/* Telemetry overlay pill */}
+                <div className="absolute bottom-2 left-3 text-[10px] font-mono text-teal-900 bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded border border-teal-200">
+                  Waduk Jatiluhur • Sektor Barat
                 </div>
+              </div>
 
-                {/* Progress bar of Hopper */}
-                <div className="p-4 bg-slate-900 border-t border-slate-800 space-y-2">
-                  <div className="flex justify-between text-xs font-mono">
-                    <span className="text-slate-300 font-semibold">KAPASITAS MUATAN HOPPER</span>
-                    <span className="text-emerald-400 font-bold">78.4% (9.4 Ton Terisi)</span>
-                  </div>
-                  <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-                    <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style={{ width: '78.4%' }} />
-                  </div>
+              {/* Progress bar hopper */}
+              <div className="space-y-1.5 font-mono text-xs">
+                <div className="flex justify-between text-slate-600">
+                  <span>KAPASITAS HOPPER BIOMASSA</span>
+                  <span className="text-teal-700 font-bold">78.4% (1.560 Kg)</span>
                 </div>
+                <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                  <div
+                    className="h-full bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"
+                    style={{ width: '78.4%' }}
+                  />
+                </div>
+              </div>
 
-                {/* Telemetry quick stats */}
-                <div className="grid grid-cols-3 divide-x divide-slate-800 bg-slate-950 p-3 text-center text-xs font-mono">
-                  <div>
-                    <span className="text-slate-500 block text-[10px]">KECEPATAN</span>
-                    <span className="text-white font-bold">1.8 Knots</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 block text-[10px]">BATERAI LiFePO4</span>
-                    <span className="text-emerald-400 font-bold">92% (52.8V)</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 block text-[10px]">SINYAL LoRa</span>
-                    <span className="text-teal-300 font-bold">-68 dBm</span>
-                  </div>
+              {/* Telemetry Quick Grid */}
+              <div className="grid grid-cols-3 gap-2 font-mono text-xs pt-1">
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-center">
+                  <span className="text-[10px] text-slate-500 block">KECEPATAN</span>
+                  <span className="font-bold text-slate-900">1.8 Knots</span>
+                </div>
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-center">
+                  <span className="text-[10px] text-slate-500 block">BATERAI</span>
+                  <span className="font-bold text-teal-700">84% LiFePO4</span>
+                </div>
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-center">
+                  <span className="text-[10px] text-slate-500 block">SINYAL LORA</span>
+                  <span className="font-bold text-teal-700">-94 dBm</span>
                 </div>
               </div>
             </div>
@@ -207,507 +185,412 @@ export const OverviewView: React.FC<OverviewViewProps> = ({ onNavigate, onAddToC
         </div>
       </section>
 
-      {/* 2. LIVE WATERWAYS RECOVERY TELEMETRY LEDGER (Bento 4 Cards) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-2 border-b border-slate-800">
+      {/* 2. LIVE WATERWAYS RECOVERY TELEMETRY LEDGER */}
+      <section className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
           <div>
-            <h2 className="text-base font-bold text-white uppercase tracking-wider font-mono">
-              Live Waterways Recovery Telemetry Ledger
+            <span className="text-xs font-mono uppercase text-teal-700 font-bold tracking-wider">
+              REAL-TIME IMPACT ACCRUAL
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              Buku Besar Pemulihan Perairan Nasional
             </h2>
-            <p className="text-xs text-slate-400">
-              Sinkronisasi Satelit Sentinel-2 L2A: 02 menit yang lalu • Geotagging WGS84
-            </p>
           </div>
-          <button
-            onClick={() => onNavigate('telemetry')}
-            className="text-xs font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition"
-          >
-            Buka Radar Peta Interaktif &gt;
-          </button>
+          <span className="text-xs font-mono text-slate-500">
+            Terverifikasi Sensor YSI & Citra Copernicus Sentinel-2
+          </span>
         </div>
 
+        {/* 4 Bento Ledger Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Bento 1 */}
-          <div className="bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 p-5 rounded-2xl transition group">
-            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
-              TOTAL BIOMASSA DIANGKAT
+          <div className="bg-white border border-slate-200 hover:border-teal-400 p-5 rounded-2xl shadow-xs transition group">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
+              TOTAL BIOMASSA TERANGKAT
             </span>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-black text-white group-hover:text-emerald-400 transition font-sans">
-                14,820
+            <div className="flex items-baseline gap-1 mt-2">
+              <span className="text-3xl font-black text-slate-900 group-hover:text-teal-700 transition">
+                14.820
               </span>
-              <span className="text-sm font-bold text-emerald-400 font-mono">Ton</span>
+              <span className="text-sm font-bold text-teal-700 font-mono">Ton</span>
             </div>
-            <p className="text-xs text-emerald-400/90 font-mono mt-2 flex items-center gap-1">
-              ↗ +142 Ton minggu ini
+            <p className="text-xs text-slate-500 mt-2">
+              Dibersihkan dari 6 waduk PLTA strategis tanpa residu herbisida kimia.
             </p>
           </div>
 
-          {/* Bento 2 */}
-          <div className="bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 p-5 rounded-2xl transition group">
-            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
-              SERTIFIKAT KARBON TERVERIFIKASI
+          <div className="bg-white border border-slate-200 hover:border-teal-400 p-5 rounded-2xl shadow-xs transition group">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
+              POTENSI SERAPAN KARBON
             </span>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-black text-emerald-400 font-sans">
-                284,500
+            <div className="flex items-baseline gap-1 mt-2">
+              <span className="text-3xl font-black text-teal-700">
+                284.500
               </span>
-              <span className="text-sm font-bold text-emerald-400 font-mono">Kg</span>
+              <span className="text-sm font-bold text-teal-700 font-mono">Kg CO₂e</span>
             </div>
-            <p className="text-xs text-slate-400 font-mono mt-2">
-              Standar OJK Taksonomi & Verra VM0042
+            <p className="text-xs text-slate-500 mt-2">
+              Mencegah pelepasan gas metana akibat pembusukan gulma anaerobik di dasar danau.
             </p>
           </div>
 
-          {/* Bento 3 */}
-          <div className="bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 p-5 rounded-2xl transition group">
-            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
-              KEMITRAAN AKTIF
+          <div className="bg-white border border-slate-200 hover:border-teal-400 p-5 rounded-2xl shadow-xs transition group">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
+              KEMITRAAN TJSL BUMN
             </span>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-black text-white group-hover:text-teal-300 transition font-sans">
+            <div className="flex items-baseline gap-1 mt-2">
+              <span className="text-3xl font-black text-slate-900 group-hover:text-teal-700 transition">
                 24
               </span>
-              <span className="text-sm font-bold text-slate-400 font-mono">Entitas</span>
+              <span className="text-sm font-bold text-slate-500 font-mono">Korporasi</span>
             </div>
-            <p className="text-xs text-teal-300 font-mono mt-2">
-              Pemprov, BUMN Energi, Operator PLTA
+            <p className="text-xs text-slate-500 mt-2">
+              BUMN Energi, Pupuk, Perbankan, dan Perkebunan terintegrasi dalam POJK 51.
             </p>
           </div>
 
-          {/* Bento 4 */}
-          <div className="bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 p-5 rounded-2xl transition group">
-            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+          <div className="bg-white border border-slate-200 hover:border-teal-400 p-5 rounded-2xl shadow-xs transition group">
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
               LUAS PERAIRAN PULIH
             </span>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-black text-cyan-400 font-sans">
+            <div className="flex items-baseline gap-1 mt-2">
+              <span className="text-3xl font-black text-teal-700">
                 412
               </span>
-              <span className="text-sm font-bold text-cyan-400 font-mono">Hektar</span>
+              <span className="text-sm font-bold text-teal-700 font-mono">Hektar</span>
             </div>
-            <p className="text-xs text-slate-400 font-mono mt-2">
-              DO (Dissolved Oxygen) naik 38%
+            <p className="text-xs text-slate-500 mt-2">
+              Mengembalikan sedimentasi normal dan meningkatkan turbulensi oksigen (DO +142%).
             </p>
           </div>
         </div>
       </section>
 
-      {/* 3. THREE PILLARS (EKOSISTEM END-TO-END) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest">
-            EKOSISTEM END-TO-END
+      {/* 3. THREE CORE PILLARS OF HYACYCLE */}
+      <section className="space-y-6">
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <span className="text-xs font-mono uppercase text-teal-700 font-bold tracking-wider">
+            ECOSYSTEM INTEGRATION
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Tiga Pilar Restorasi Danau & Sirkularitas Biomassa
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+            Tiga Pilar Ekosistem Sirkular HyaCycle
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400">
-            Dari pengerukan presisi otonom di tengah danau hingga rantai pasok produk organik bernilai komersial tinggi.
+          <p className="text-xs sm:text-sm text-slate-600">
+            Arsitektur komprehensif yang menghubungkan robotika perairan otonom, verifikasi data satelit, dan hilirisasi ekonomi bernilai tambah.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Pilar 1 */}
-          <div className="bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 flex flex-col justify-between transition group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
-                <Radio className="w-6 h-6" />
-              </div>
-              <span className="text-[11px] font-mono text-emerald-400 font-bold block">
-                PILAR 01 • PERANGKAT KERAS OTONOM
-              </span>
-              <h3 className="text-lg font-bold text-white">
-                Smart Harvester
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Kapal panen katamaran bertenaga surya-hibrida tanpa awak. Beroperasi 16 jam non-stop dengan sensor LiDAR dan sonar anti-tabrakan.
-              </p>
-              <ul className="space-y-2 text-xs text-slate-400 font-mono pt-2">
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  Penghindaran rintangan sonar AI presisi tinggi
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  Sistem pencacah mekanis hidrolik instan
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  Zero-emission propulsi motor listrik brushless
-                </li>
-              </ul>
+          {/* Pillar 1 */}
+          <div
+            onClick={() => onNavigate('telemetry')}
+            className="bg-white border border-slate-200 hover:border-teal-500/80 p-6 rounded-3xl shadow-xs hover:shadow-md transition cursor-pointer group space-y-4"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 group-hover:scale-105 transition">
+              <Radio className="w-6 h-6" />
             </div>
-            <button
-              onClick={() => onNavigate('telemetry')}
-              className="mt-6 pt-4 border-t border-slate-800/80 text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition"
-            >
-              Pelajari Spesifikasi Armada &gt;
-            </button>
+            <h3 className="text-lg font-bold text-slate-900 group-hover:text-teal-700 transition">
+              1. Smart Harvester Hardware
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Armada katamaran elektrik bertenaga surya & LiFePO4 dengan pisau pencacah hidrolik auger, pemandu rute otonom GNSS RTK, dan kendali jarak jauh LoRaWAN jangkauan 15 Km.
+            </p>
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-teal-700 group-hover:gap-2 transition">
+              Buka Layar Telemetri &gt;
+            </span>
           </div>
 
-          {/* Pilar 2 */}
-          <div className="bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 flex flex-col justify-between transition group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center">
-                <BarChart3 className="w-6 h-6" />
-              </div>
-              <span className="text-[11px] font-mono text-teal-400 font-bold block">
-                PILAR 02 • KOMPUTASI & KEPATUHAN
-              </span>
-              <h3 className="text-lg font-bold text-white">
-                AI Dashboard & ESG Analytics
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Platform intelijen geospasial real-time yang mengonversi pengerukan biomassa menjadi sertifikat emisi karbon yang siap diaudit akuntan publik.
-              </p>
-              <ul className="space-y-2 text-xs text-slate-400 font-mono pt-2">
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-teal-400" />
-                  Peta konsentrasi gulma perairan NDVI/NDWI
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-teal-400" />
-                  Kalkulator klaim Scope 1, 2, & 3 otomatis
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-teal-400" />
-                  Sertifikat CSR siap audit akuntan publik
-                </li>
-              </ul>
+          {/* Pillar 2 */}
+          <div
+            onClick={() => onNavigate('esg')}
+            className="bg-white border border-slate-200 hover:border-teal-500/80 p-6 rounded-3xl shadow-xs hover:shadow-md transition cursor-pointer group space-y-4"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-700 group-hover:scale-105 transition">
+              <BarChart3 className="w-6 h-6" />
             </div>
-            <button
-              onClick={() => onNavigate('esg')}
-              className="mt-6 pt-4 border-t border-slate-800/80 text-xs font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1 transition"
-            >
-              Eksplorasi Fitur Dashboard &gt;
-            </button>
+            <h3 className="text-lg font-bold text-slate-900 group-hover:text-cyan-700 transition">
+              2. AI Dashboard & ESG Analytics
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Pengolahan citra satelit Sentinel-2 multi-spektral untuk prediksi persebaran gulma, kalkulasi serapan karbon terhindar otomatis, serta buku besar audit POJK 51 siap verifikasi OJK.
+            </p>
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-cyan-700 group-hover:gap-2 transition">
+              Buka Hub ESG & CSR &gt;
+            </span>
           </div>
 
-          {/* Pilar 3 */}
-          <div className="bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 flex flex-col justify-between transition group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center">
-                <ShoppingBag className="w-6 h-6" />
-              </div>
-              <span className="text-[11px] font-mono text-cyan-400 font-bold block">
-                PILAR 03 • HILIRISASI SIRKULAR
-              </span>
-              <h3 className="text-lg font-bold text-white">
-                Zero Waste Marketplace
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Biomassa eceng gondok yang dipanen diproses 100% tanpa residu menjadi pupuk bio-organik, biopot biodegradable, briket, dan kriya bernilai ekspor.
-              </p>
-              <ul className="space-y-2 text-xs text-slate-400 font-mono pt-2">
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-cyan-400" />
-                  Pupuk Bio-Organic HyaGrow kaya Kalium
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-cyan-400" />
-                  Biopot Biodegradable terurai 45-60 hari
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-cyan-400" />
-                  Pemberdayaan UMKM pengrajin & petani lokal
-                </li>
-              </ul>
+          {/* Pillar 3 */}
+          <div
+            onClick={() => onNavigate('marketplace')}
+            className="bg-white border border-slate-200 hover:border-teal-500/80 p-6 rounded-3xl shadow-xs hover:shadow-md transition cursor-pointer group space-y-4"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 group-hover:scale-105 transition">
+              <ShoppingBag className="w-6 h-6" />
             </div>
-            <button
-              onClick={() => onNavigate('marketplace')}
-              className="mt-6 pt-4 border-t border-slate-800/80 text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition"
-            >
-              Katalog Produk Sirkular &gt;
-            </button>
+            <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-700 transition">
+              3. Zero Waste Circular Marketplace
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Konversi 100% biomassa eceng gondok menjadi pupuk organik granul kaya kalium alami (HyaBio-Grow), pot bibit biodegradable (HyaPot), dan pakan silase ternak berstandar lab Kementan.
+            </p>
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 group-hover:gap-2 transition">
+              Jelajahi Produk &gt;
+            </span>
           </div>
         </div>
       </section>
 
-      {/* 4. CIRCULAR PRODUCT SHOWCASE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+      {/* 4. PRODUCT HIGHLIGHT SHOWCASE */}
+      <section className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
           <div>
-            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
-              PRODUK HASIL HILIRISASI
+            <span className="text-xs font-mono uppercase text-teal-700 font-bold tracking-wider">
+              COMMERCIAL CIRCULAR PRODUCTS
             </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-white mt-1">
-              Biomassa yang Diberdayakan Kembali
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              Produk Hilirisasi Biomassa Teruji Mutu
             </h2>
           </div>
           <button
             onClick={() => onNavigate('marketplace')}
-            className="text-xs font-bold text-emerald-400 hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1"
           >
-            Lihat Semua Produk & Simulasi Diskon B2B &gt;
+            Lihat Semua Produk di Marketplace &gt;
           </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-emerald-500/40 transition">
+          {/* Product 1 */}
+          <div className="bg-white border border-slate-200 hover:border-teal-400 rounded-3xl p-5 shadow-xs flex flex-col justify-between space-y-4">
             <div className="space-y-3">
-              <span className="text-[10px] font-mono uppercase bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded">
-                ORGANIC CERTIFIED SNI
-              </span>
-              <h4 className="text-base font-bold text-white">
-                HyaGrow Bio-Fertilizer (25 Kg)
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase bg-teal-50 text-teal-800 border border-teal-200 px-2 py-0.5 rounded font-bold">
+                  ORGANIC CERTIFIED
+                </span>
+                <span className="text-xs font-mono text-slate-500">Stok: 420 Sak</span>
+              </div>
+              <h4 className="text-base font-bold text-slate-900">
+                HyaBio-Grow Organik Kompos Granul (25 Kg)
               </h4>
-              <p className="text-xs text-slate-300">
-                Pupuk kompos aktif diperkaya Kalium alami dan asam humat. Meningkatkan produktivitas gabah dan kesuburan tanah.
+              <p className="text-xs text-slate-600">
+                Pupuk kompos pelet dari fermentasi eceng gondok kaya Kalium (K₂O 3.8%) dan mikroorganisme pembenah tanah.
               </p>
-              <div className="font-mono text-xs text-emerald-400">
-                -30 Kg CO₂e / karung
+              <div className="text-xs font-mono text-teal-700 font-semibold">
+                Serapan Karbon: -30 Kg CO₂e / Sak
               </div>
             </div>
-            <div className="pt-4 mt-4 border-t border-slate-800 flex items-center justify-between">
-              <span className="text-base font-bold text-white font-mono">Rp 68.000 <span className="text-xs text-slate-400 font-normal">/ zak</span></span>
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] text-slate-500 block uppercase font-mono">Harga Grosir</span>
+                <span className="text-base font-bold text-slate-900 font-mono">Rp 65.000</span>
+              </div>
               <button
                 onClick={() => onAddToCart('prod-01')}
-                className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition"
+                className="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 transition cursor-pointer"
               >
-                Pesan Grosir
+                + Keranjang
               </button>
             </div>
           </div>
 
-          {/* Card 2 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-emerald-500/40 transition">
+          {/* Product 2 */}
+          <div className="bg-white border border-slate-200 hover:border-teal-400 rounded-3xl p-5 shadow-xs flex flex-col justify-between space-y-4">
             <div className="space-y-3">
-              <span className="text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded">
-                100% DEGRADABLE
-              </span>
-              <h4 className="text-base font-bold text-white">
-                HyaPot Eco-Nursery Pot (Pack 100)
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded font-bold">
+                  100% DEGRADABLE
+                </span>
+                <span className="text-xs font-mono text-slate-500">Stok: 1.250 Pcs</span>
+              </div>
+              <h4 className="text-base font-bold text-slate-900">
+                HyaPot Eco Biodegradable Nursery Pot (12 cm)
               </h4>
-              <p className="text-xs text-slate-300">
-                Pot semai ramah lingkungan pengganti polybag plastik bibit kelapa sawit dan holtikultura. Langsung tanam ke tanah.
+              <p className="text-xs text-slate-600">
+                Pot bibit ramah lingkungan pengganti polybag plastik. Terurai sempurna di dalam tanah dalam 45 hari menjadi pupuk.
               </p>
-              <div className="font-mono text-xs text-emerald-400">
-                -15 Kg CO₂e / pack
+              <div className="text-xs font-mono text-teal-700 font-semibold">
+                Bebas Mikroplastik 100%
               </div>
             </div>
-            <div className="pt-4 mt-4 border-t border-slate-800 flex items-center justify-between">
-              <span className="text-base font-bold text-white font-mono">Rp 120.000 <span className="text-xs text-slate-400 font-normal">/ pack</span></span>
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] text-slate-500 block uppercase font-mono">Harga Grosir</span>
+                <span className="text-base font-bold text-slate-900 font-mono">Rp 1.800</span>
+              </div>
               <button
                 onClick={() => onAddToCart('prod-02')}
-                className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition"
+                className="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 transition cursor-pointer"
               >
-                Pesan Grosir
+                + Keranjang
               </button>
             </div>
           </div>
 
-          {/* Card 3 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-emerald-500/40 transition">
+          {/* Product 3 */}
+          <div className="bg-white border border-slate-200 hover:border-teal-400 rounded-3xl p-5 shadow-xs flex flex-col justify-between space-y-4">
             <div className="space-y-3">
-              <span className="text-[10px] font-mono uppercase bg-teal-950 text-teal-300 border border-teal-800 px-2 py-0.5 rounded">
-                CSR HANDCRAFTED
-              </span>
-              <h4 className="text-base font-bold text-white">
-                HyaFiber Acoustic Panels & Kriya
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase bg-cyan-50 text-cyan-800 border border-cyan-200 px-2 py-0.5 rounded font-bold">
+                  HIGH PROTEIN
+                </span>
+                <span className="text-xs font-mono text-slate-500">Stok: 180 Drum</span>
+              </div>
+              <h4 className="text-base font-bold text-slate-900">
+                HyaFeed Pakan Ternak Silase Fermentasi (50 Kg)
               </h4>
-              <p className="text-xs text-slate-300">
-                Panel peredam suara ruangan ramah lingkungan berbahan serat anyaman eceng gondok olahan UMKM binaan waduk.
+              <p className="text-xs text-slate-600">
+                Pakan hijauan fermentasi kaya nutrisi untuk sapi, kambing, dan domba dengan masa simpan hingga 8 bulan.
               </p>
-              <div className="font-mono text-xs text-emerald-400">
-                -45 Kg CO₂e / m²
+              <div className="text-xs font-mono text-teal-700 font-semibold">
+                Protein Kasar 14.2% Tervalidasi
               </div>
             </div>
-            <div className="pt-4 mt-4 border-t border-slate-800 flex items-center justify-between">
-              <span className="text-base font-bold text-white font-mono">Rp 250.000 <span className="text-xs text-slate-400 font-normal">/ m²</span></span>
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] text-slate-500 block uppercase font-mono">Harga Grosir</span>
+                <span className="text-base font-bold text-slate-900 font-mono">Rp 135.000</span>
+              </div>
               <button
-                onClick={() => onNavigate('csr')}
-                className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-200 bg-slate-800 hover:bg-slate-700 transition"
+                onClick={() => onAddToCart('prod-03')}
+                className="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 transition cursor-pointer"
               >
-                Konsultasi Kriya
+                + Keranjang
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. TRUSTED BY GOV & OPERATORS & TESTIMONIAL */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-xs font-mono uppercase text-slate-400 tracking-wider">
-              DIPERCAYA OLEH PENGELOLA SUMBER DAYA AIR & PEMANGKU KEBIJAKAN LINGKUNGAN
-            </span>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 text-xs font-bold font-mono text-slate-300">
-              <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-center text-center">
-                Kementerian LHK<br />(Program DAS Citarum)
-              </div>
-              <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-center text-center">
-                PLTA Cirata & Saguling<br />(Proteksi Intake Turbin)
-              </div>
-              <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-center text-center">
-                Perum Jasa Tirta II<br />(Waduk Jatiluhur)
-              </div>
-              <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-center text-center">
-                Badan Otorita Danau Toba<br />(Destinasi Wisata Super)
-              </div>
-            </div>
-          </div>
+      {/* 5. GOVERNMENT & WATER OPERATORS TRUST SECTION */}
+      <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="text-center max-w-xl mx-auto space-y-1">
+          <span className="text-xs font-mono uppercase text-teal-700 font-bold">
+            TRUSTED NATIONAL ALLIANCES
+          </span>
+          <h3 className="text-xl font-bold text-slate-900">
+            Dipercaya Pengelola Waduk PLTA & Danau Prioritas
+          </h3>
+        </div>
 
-          <div className="border-t border-slate-800/80 pt-8 max-w-4xl mx-auto text-center space-y-4">
-            <p className="text-base sm:text-lg italic text-slate-200 leading-relaxed">
-              &ldquo;Implementasi sistem armada otonom HyaCycle menghemat 42% biaya pengerukan manual kami per kuartal sembari memberikan laporan data emisi metana yang dapat diaudit langsung untuk laporan keberlanjutan tahunan perusahaan.&rdquo;
-            </p>
-            <div>
-              <p className="text-xs font-bold text-emerald-400">Divisi Konservasi Lingkungan Hidup & Keandalan Waduk</p>
-              <p className="text-[11px] text-slate-400">Operator Waduk Tenaga Air Nasional (Jawa Barat)</p>
-            </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center font-mono text-xs">
+          <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span className="text-teal-700 font-bold block text-sm">PLTA CIRATA</span>
+            <span className="text-[11px] text-slate-500">Sektor Barat & Dermaga Cipeundeuy</span>
+          </div>
+          <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span className="text-teal-700 font-bold block text-sm">JATILUHUR (PJT II)</span>
+            <span className="text-[11px] text-slate-500">Intake Bendungan Utama</span>
+          </div>
+          <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span className="text-teal-700 font-bold block text-sm">RAWA PENING</span>
+            <span className="text-[11px] text-slate-500">Kawasan Intake PLTA Jelok</span>
+          </div>
+          <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span className="text-teal-700 font-bold block text-sm">DANAU TOBA</span>
+            <span className="text-[11px] text-slate-500">Revitalisasi Waterfront Balige</span>
+          </div>
+        </div>
+
+        {/* Testimonial Quote */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-teal-50/70 border border-teal-200 text-xs sm:text-sm text-slate-700 italic text-center max-w-3xl mx-auto leading-relaxed">
+          &ldquo;Implementasi armada otonom HyaCycle di Waduk Cirata berhasil menekan laju eutrofikasi hingga 65% dalam 90 hari tanpa mengganggu intake turbin PLTA, serta menghasilkan laporan ESG audit-ready yang transparan bagi pemegang saham BUMN.&rdquo;
+          <div className="mt-2 not-italic font-bold text-teal-900 font-mono text-xs">
+            — Ir. Bambang Wicaksono, M.T. (VP Operasi Lingkungan Pembangkitan Hidro)
           </div>
         </div>
       </section>
 
       {/* 6. CONSULTATION & SCHEDULING FORM */}
-      <section id="consultation-form" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
-          <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
-            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest">
-              KONSULTASI & JADWALKAN DEMO
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
-              Siap Merevitalisasi Ekosistem Perairan Anda?
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Tim engineering dan analis ESG kami siap mendemonstrasikan armada otonom di lokasi bendungan atau danau Anda.
+      <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-lg space-y-6">
+        <div className="max-w-xl mx-auto text-center space-y-2">
+          <span className="text-xs font-mono uppercase text-teal-700 font-bold">
+            TAKE CONCRETE ACTION
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+            Jadwalkan Demonstrasi & Asesmen Perairan
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600">
+            Tim teknis dan auditor lingkungan HyaCycle siap melakukan survei batimetri serta simulasi proposal kemitraan TJSL untuk institusi Anda.
+          </p>
+        </div>
+
+        {formSubmitted ? (
+          <div className="p-6 rounded-2xl bg-teal-50 border border-teal-300 text-center space-y-2 max-w-lg mx-auto">
+            <CheckCircle2 className="w-8 h-8 text-teal-600 mx-auto" />
+            <h4 className="text-base font-bold text-teal-900">Permohonan Demonstrasi Berhasil Terkirim!</h4>
+            <p className="text-xs text-teal-800">
+              Technical Account Lead kami akan menghubungi Anda dalam waktu 1x24 jam dengan proposal asesmen batimetri awal.
             </p>
           </div>
-
-          {formSubmitted ? (
-            <div className="p-8 text-center bg-emerald-950/40 border border-emerald-500/40 rounded-2xl space-y-3 animate-in fade-in">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500">
-                <Check className="w-6 h-6" />
+        ) : (
+          <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1 font-mono">
+                  Instansi / BUMN / Korporasi
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Contoh: PT PLN Nusantara Power"
+                  value={bumnOrg}
+                  onChange={(e) => setBumnOrg(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 text-xs text-slate-900 rounded-xl p-3 focus:outline-none focus:border-teal-600"
+                />
               </div>
-              <h4 className="text-lg font-bold text-white">Permohonan Terkirim Sukses!</h4>
-              <p className="text-xs text-slate-300 max-w-md mx-auto">
-                Terima kasih, tim Technical Support HyaCycle akan menghubungi Anda dalam waktu 1x24 jam untuk menjadwalkan demo telemetri langsung di lokasi perairan Anda.
-              </p>
-              <button
-                type="button"
-                onClick={() => setFormSubmitted(false)}
-                className="mt-4 px-4 py-2 rounded-lg text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 transition"
-              >
-                Kirim Permohonan Lain
-              </button>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1 font-mono">
+                  Target Waduk / Danau
+                </label>
+                <select
+                  value={demoLake}
+                  onChange={(e) => setDemoLake(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 text-xs text-slate-900 rounded-xl p-3 focus:outline-none focus:border-teal-600 font-mono"
+                >
+                  <option>Waduk Cirata (Jawa Barat)</option>
+                  <option>Waduk Jatiluhur (Jawa Barat)</option>
+                  <option>Rawa Pening (Jawa Tengah)</option>
+                  <option>Danau Toba (Sumatera Utara)</option>
+                  <option>Danau Limboto (Gorontalo)</option>
+                </select>
+              </div>
             </div>
-          ) : (
-            <form onSubmit={handleFormSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Nama Lengkap Pemohon
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.fullName}
-                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    placeholder="Contoh: Ir. Bambang Triyono"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Instansi / BUMN / Korporasi
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.institution}
-                    onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
-                    placeholder="Contoh: PT PLN Nusantara Power"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
-                  />
-                </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1 font-mono">
+                  Usulan Tanggal Asesmen Lapangan
+                </label>
+                <input
+                  type="date"
+                  value={demoDate}
+                  onChange={(e) => setDemoDate(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 text-xs text-slate-900 rounded-xl p-3 focus:outline-none focus:border-teal-600 font-mono"
+                />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Email Resmi Perusahaan
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="nama@instansi.co.id"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    No. WhatsApp / Telepon
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="0812-XXXX-XXXX"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 font-mono"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1 font-mono">
+                  Estimasi Alokasi Anggaran TJSL
+                </label>
+                <select className="w-full bg-slate-50 border border-slate-300 text-xs text-slate-900 rounded-xl p-3 focus:outline-none focus:border-teal-600 font-mono">
+                  <option>Rp 500 Juta - Rp 1,5 Miliar</option>
+                  <option>Rp 1,5 Miliar - Rp 3,0 Miliar</option>
+                  <option>&gt; Rp 3,0 Miliar (Multi-Tahun)</option>
+                </select>
               </div>
+            </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Kategori Kebutuhan
-                  </label>
-                  <select
-                    value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
-                  >
-                    <option>Pembersihan Reservoir PLTA / Bendungan</option>
-                    <option>Kemitraan Alokasi CSR & TJSL BUMN</option>
-                    <option>Pengadaan Produk Sirkular (Pupuk / Biopot Skala Fuso)</option>
-                    <option>Restorasi Danau Wisata Nasional</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Lokasi Perairan & Estimasi Luas (Ha)
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.lakeArea}
-                    onChange={(e) => setFormData({ ...formData, lakeArea: e.target.value })}
-                    placeholder="Contoh: Waduk Cirata Zona C, Est. 45 Hektar"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-xl shadow-emerald-900/40 flex items-center justify-center gap-2 transition cursor-pointer mt-4"
-              >
-                <Send className="w-4 h-4" />
-                Kirim Permohonan Penjadwalan & Konsultasi
-              </button>
-            </form>
-          )}
-        </div>
+            <button
+              type="submit"
+              className="w-full py-3.5 rounded-xl font-bold text-sm text-white bg-teal-600 hover:bg-teal-500 shadow-md shadow-teal-700/20 transition flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Send className="w-4 h-4" />
+              Kirim Permohonan Asesmen Lapangan & Proposal
+            </button>
+          </form>
+        )}
       </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-slate-900 pt-10 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2025 HyaCycle Inovasi Nusantara. All rights reserved.</p>
-          <div className="flex items-center gap-6 font-mono text-[11px]">
-            <span>OJK POJK 51/2017</span>
-            <span>SRN-PPI #772/IDN/2025</span>
-            <span>ISO 14064-2:2019</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

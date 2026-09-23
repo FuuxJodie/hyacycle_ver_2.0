@@ -37,22 +37,22 @@ export const ProposalModal: React.FC<ProposalModalProps> = ({
   }).format(budgetTotal);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto animate-in fade-in">
-      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in">
+      <div className="relative w-full max-w-4xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden my-8">
         {/* Top bar */}
-        <div className="bg-slate-950 px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-lg">
+            <div className="p-2 bg-teal-100 text-teal-700 rounded-lg">
               <FileCheck className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-white font-bold text-base flex items-center gap-2">
+              <h3 className="text-slate-900 font-bold text-base flex items-center gap-2">
                 Proposal Program Kemitraan Strategis TJSL / CSR
-                <span className="text-[10px] font-mono uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono uppercase bg-teal-100 text-teal-800 border border-teal-300 px-2 py-0.5 rounded font-bold">
                   BUMN & OJK READY
                 </span>
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 Pilar Lingkungan Hidup & Ekonomi Sirkular Berkelanjutan (SDG 6, 8, 13, 14)
               </p>
             </div>
@@ -60,137 +60,181 @@ export const ProposalModal: React.FC<ProposalModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => window.print()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition"
+              title="Cetak Proposal"
             >
-              <Printer className="w-3.5 h-3.5" />
-              Cetak
-            </button>
-            <button
-              onClick={() => {
-                alert("Proposal resmi siap dikirim via email resmi atau diunduh sebagai PDF dengan stempel digital.");
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow transition"
-            >
-              <Download className="w-3.5 h-3.5" />
-              Unduh Berkas Proposal (.pdf)
+              <Printer className="w-4 h-4" />
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition ml-2"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Content Document */}
-        <div className="p-8 bg-slate-950 text-slate-200 font-sans space-y-6 max-h-[75vh] overflow-y-auto">
-          {/* Header */}
-          <div className="border-b-2 border-emerald-500/40 pb-6 flex items-start justify-between">
+        {/* Paper Document Preview */}
+        <div className="p-6 sm:p-8 space-y-6 max-h-[75vh] overflow-y-auto">
+          {/* Official Letterhead */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b-2 border-slate-900">
             <div>
-              <HyaCycleLogo size="md" subtitleText="CLEANTECH FOR CSR & ESG EXCELLENCE" />
-              <p className="text-xs text-slate-400 mt-2">
-                Dokumen Usulan PKS (Perjanjian Kerja Sama) TJSL BUMN Nomor: HYA-CSR/PKS-PROP/2025/082
+              <HyaCycleLogo size="md" />
+              <p className="text-xs text-slate-500 mt-1">
+                PT HyaCycle Teknologi Sirkular Nusantara • Divisi Kemitraan Strategis B2G & BUMN
+              </p>
+              <p className="text-[11px] text-slate-400 font-mono">
+                Gedung Graha Mandiri Lt. 12, Jl. Imam Bonjol No. 61, Jakarta Pusat 10310
               </p>
             </div>
-            <div className="text-right">
-              <span className="text-xs font-mono uppercase bg-emerald-950 text-emerald-300 border border-emerald-500/40 px-3 py-1 rounded-md font-bold inline-flex items-center gap-1">
-                <Sparkles className="w-3 h-3" /> SIAP DIAJUKAN
-              </span>
-              <p className="text-xs text-slate-400 mt-2">Tanggal: {new Date().toLocaleDateString('id-ID', { dateStyle: 'long' })}</p>
+            <div className="text-left sm:text-right font-mono text-xs text-slate-600">
+              <p>Nomor Dokumen: <strong>PROP-CSR/HYA/2025/081</strong></p>
+              <p>Tanggal: <strong>18 Mei 2025</strong></p>
+              <p>Sifat: <strong>Rahasia & Eksklusif (B2G)</strong></p>
             </div>
           </div>
 
-          {/* Partner & Location Highlight */}
-          <div className="bg-gradient-to-r from-slate-900 to-emerald-950/40 border border-slate-800 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono uppercase text-emerald-400">Mitra Calon Sponsor Korporasi:</span>
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-emerald-400" />
-                {bumnName || 'PT Bank Mandiri (Persero) Tbk'}
-              </h2>
-              <p className="text-xs text-slate-400">
-                Lokasi Program: <strong className="text-slate-200">{lakeName}</strong> • Durasi Kemitraan: <strong className="text-slate-200">{durationMonths} Bulan</strong>
-              </p>
-            </div>
-            <div className="text-right bg-slate-900/90 border border-emerald-500/30 px-4 py-3 rounded-lg">
-              <p className="text-[11px] font-mono text-slate-400">Usulan Anggaran Nilai PKS:</p>
-              <p className="text-xl font-black text-emerald-400">{formattedBudget}</p>
-              <p className="text-[10px] text-slate-400">Alokasi Armada: {harvestersCount} Kapal Otonom</p>
-            </div>
+          {/* Recipient Box */}
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+            <p className="text-slate-500 font-mono">Kepada Yth:</p>
+            <p className="text-base font-bold text-slate-900 mt-0.5">
+              Direksi & Tim Pengelola TJSL / CSR
+            </p>
+            <p className="text-sm font-semibold text-teal-700">{bumnName}</p>
+            <p className="text-slate-600 mt-1">
+              Perihal: <em>Usulan Program Bersama Pemulihan Waduk/Danau & Hilirisasi Biomassa Ramah Lingkungan Berbasis IoT</em>
+            </p>
           </div>
 
-          {/* Target Impact Bento */}
-          <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-3">
-              Proyeksi Dampak Terukur (KPI Program TJSL Berkelanjutan):
+          {/* Executive Summary */}
+          <div className="space-y-2 text-xs leading-relaxed text-slate-700">
+            <h4 className="font-bold text-sm text-slate-900 border-b border-slate-200 pb-1">
+              1. Ringkasan Eksekutif & Urgensi Masalah
             </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-xl">
-                <p className="text-[11px] text-slate-400 uppercase font-mono">Restorasi Danau</p>
-                <p className="text-xl font-black text-emerald-400 mt-1">{impactMetrics.hectares} Ha</p>
-                <p className="text-[10px] text-slate-400 mt-0.5">Badan air bebas gulma</p>
-              </div>
-              <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-xl">
-                <p className="text-[11px] text-slate-400 uppercase font-mono">Biomassa Dikelola</p>
-                <p className="text-xl font-black text-teal-400 mt-1">{impactMetrics.biomassTons} Ton</p>
-                <p className="text-[10px] text-slate-400 mt-0.5">Diolah 100% jadi pupuk & kriya</p>
-              </div>
-              <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-xl">
-                <p className="text-[11px] text-slate-400 uppercase font-mono">Offset Emisi GRK</p>
-                <p className="text-xl font-black text-cyan-400 mt-1">{impactMetrics.carbonOffsetTons} Ton</p>
-                <p className="text-[10px] text-slate-400 mt-0.5">Sertifikasi IDXCarbon / SRN</p>
-              </div>
-              <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-xl">
-                <p className="text-[11px] text-slate-400 uppercase font-mono">Serapan Tenaga Kerja</p>
-                <p className="text-xl font-black text-amber-400 mt-1">{impactMetrics.localJobs} Orang</p>
-                <p className="text-[10px] text-slate-400 mt-0.5">Masyarakat pesisir danau</p>
-              </div>
-            </div>
+            <p>
+              Eutrofikasi akibat ledakan populasi eceng gondok (<em>Eichhornia crassipes</em>) di kawasan <strong>{lakeName}</strong> telah menurunkan kapasitas tampung efektif waduk, mempercepat pendangkalan sedimentasi hingga 2,4 mm/tahun, serta mengancam keandalan suplai air intake PLTA / irigasi pertanian.
+            </p>
+            <p>
+              Melalui kemitraan strategis ini, <strong>{bumnName}</strong> bersama HyaCycle akan mengoperasikan <strong>{harvestersCount} Unit Kapal Smart Harvester Otonom</strong> selama <strong>{durationMonths} Bulan</strong> berturut-turut untuk merevitalisasi ekosistem perairan dengan pelaporan terverifikasi POJK 51.
+            </p>
           </div>
 
-          {/* Deliverables List */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-              Output & Fasilitas Pelaporan Korporasi yang Diperoleh:
+          {/* Impact Matrix Grid */}
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs text-slate-900 border-b border-slate-200 pb-1">
+              2. Matriks Komitmen Capaian & Indikator ESG
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white">Akses Akun Portal ESG Institutional:</strong>
-                  <p className="text-slate-400 mt-0.5">Pantau telemetri GPS kapal otonom dan tangkapan satelit NDVI secara live 24/7.</p>
-                </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-center">
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <span className="text-[10px] text-slate-500 block">TARGET PERAIRAN BERSIH</span>
+                <span className="text-lg font-bold text-teal-700">{impactMetrics.hectares} Hektar</span>
               </div>
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white">Laporan Keberlanjutan Siap Audit OJK:</strong>
-                  <p className="text-slate-400 mt-0.5">Format terstandar POJK 51/2017 & GRI Standards untuk Annual Sustainability Report.</p>
-                </div>
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <span className="text-[10px] text-slate-500 block">BIOMASSA TERANGKAT</span>
+                <span className="text-lg font-bold text-cyan-700">{impactMetrics.biomassTons} Ton</span>
               </div>
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white">Branding Lambung Kapal & Dermaga:</strong>
-                  <p className="text-slate-400 mt-0.5">Pemasangan logo korporasi pada kapal harvester katamaran dan posko edukasi warga.</p>
-                </div>
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <span className="text-[10px] text-slate-500 block">KREDIT KARBON CO₂e</span>
+                <span className="text-lg font-bold text-emerald-700">{impactMetrics.carbonOffsetTons} Ton</span>
               </div>
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg flex items-start gap-2.5">
-                <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white">Pemberdayaan Kelompok Tani / UMKM Binaan:</strong>
-                  <p className="text-slate-400 mt-0.5">Pelatihan pembuatan pupuk organik HyaGrow dan biopot untuk kelompok tani binaan mitra.</p>
-                </div>
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <span className="text-[10px] text-slate-500 block">SERAPAN WARGA LOKAL</span>
+                <span className="text-lg font-bold text-amber-700">{impactMetrics.localJobs} Orang</span>
               </div>
             </div>
           </div>
 
-          {/* Legal and compliance footer */}
-          <div className="p-4 bg-slate-900/40 border border-slate-800 rounded-xl text-[11px] text-slate-400 flex justify-between items-center">
-            <span>Disusun oleh Tim Kemitraan Strategis HyaCycle Cleantech</span>
-            <span className="font-mono text-emerald-400">Verifikasi Dokumen ID: PROP-HYA-2025-X09</span>
+          {/* Financial Breakdown */}
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs text-slate-900 border-b border-slate-200 pb-1">
+              3. Rencana Anggaran Biaya (RAB) Program TJSL
+            </h4>
+            <div className="border border-slate-200 rounded-xl overflow-hidden text-xs font-mono">
+              <table className="w-full text-left">
+                <thead className="bg-slate-50 text-slate-600 border-b border-slate-200">
+                  <tr>
+                    <th className="p-2.5">KOMPONEN PROGRAM</th>
+                    <th className="p-2.5">ALOKASI</th>
+                    <th className="p-2.5 text-right">NOMINAL (IDR)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-700">
+                  <tr>
+                    <td className="p-2.5">Operasional & Logistik Armada Kapal Harvester ({harvestersCount} Unit)</td>
+                    <td className="p-2.5 text-teal-700">45%</td>
+                    <td className="p-2.5 text-right font-bold text-slate-900">
+                      {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(budgetTotal * 0.45)}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-2.5">Pengolahan Hilirisasi Pupuk Kompos & Biopot Komunitas</td>
+                    <td className="p-2.5 text-cyan-700">30%</td>
+                    <td className="p-2.5 text-right font-bold text-slate-900">
+                      {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(budgetTotal * 0.30)}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-2.5">Pemberdayaan Kelompok Tani Lingkar Waduk & Pelatihan</td>
+                    <td className="p-2.5 text-emerald-700">20%</td>
+                    <td className="p-2.5 text-right font-bold text-slate-900">
+                      {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(budgetTotal * 0.20)}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-2.5">Audit OJK POJK 51 & Sertifikasi Karbon SRN-PPI</td>
+                    <td className="p-2.5 text-amber-700">5%</td>
+                    <td className="p-2.5 text-right font-bold text-slate-900">
+                      {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(budgetTotal * 0.05)}
+                    </td>
+                  </tr>
+                  <tr className="bg-slate-50 font-bold text-slate-900">
+                    <td className="p-2.5" colSpan={2}>TOTAL NILAI INVESTASI PROGRAM TJSL BUMN</td>
+                    <td className="p-2.5 text-right text-teal-700 text-sm">
+                      {formattedBudget}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+
+          {/* Legal Signatures */}
+          <div className="pt-6 border-t border-slate-200 grid grid-cols-2 gap-8 text-center text-xs">
+            <div>
+              <p className="text-slate-500 font-mono">Diusulkan Oleh:</p>
+              <p className="font-bold text-slate-900 mt-1">PT HyaCycle Teknologi Sirkular</p>
+              <div className="h-16 flex items-center justify-center">
+                <span className="font-serif italic text-teal-700 font-bold">[Tanda Tangan Digital Tersertifikasi BSrE]</span>
+              </div>
+              <p className="font-bold text-slate-800">Dr. Ir. Aris Thorne, M.Sc.</p>
+              <p className="text-slate-500 text-[10px]">Chief Executive Officer</p>
+            </div>
+            <div>
+              <p className="text-slate-500 font-mono">Menyetujui Sebagai Mitra Pelaksana:</p>
+              <p className="font-bold text-slate-900 mt-1">{bumnName}</p>
+              <div className="h-16 flex items-center justify-center text-slate-300">
+                <span className="border-b border-dashed border-slate-400 w-36"></span>
+              </div>
+              <p className="font-bold text-slate-800">Direktur Human Capital & TJSL</p>
+              <p className="text-slate-500 text-[10px]">Untuk & Atas Nama Korporasi</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex items-center justify-between">
+          <span className="text-xs font-mono text-slate-500">
+            Status: Draft MoU Siap Ditandatangani
+          </span>
+          <button
+            onClick={() => {
+              alert(`Mengunduh Berkas Proposal Resmi untuk ${bumnName} (Format PDF OJK)...`);
+            }}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 transition shadow-xs cursor-pointer"
+          >
+            <Download className="w-4 h-4" />
+            Unduh Berkas Lengkap (PDF 24 Halaman)
+          </button>
         </div>
       </div>
     </div>
