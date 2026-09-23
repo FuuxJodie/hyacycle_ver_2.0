@@ -1,0 +1,6 @@
+{
+  "name": "HyaCycle - Cleantech Telemetry & ESG Ecosystem",
+  "description": "Autonomous robotic water hyacinth harvesting, IoT live telemetry, Sentinel-2 geospatial analytics, zero waste circular marketplace, and audited ESG & CSR management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
